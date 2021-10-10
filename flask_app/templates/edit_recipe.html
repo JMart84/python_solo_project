@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+        <meta charset="UTF-8">
+    <title>Brewer's Database</title>
+    </head>
+    <body class="text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-9">
+                <h1>Edit Recipe</h1>
+            </div>
+            <div class="col-1">
+                <a href="/dashboard">
+                    <button class="btn btn-secondary">Home</button>
+                </a>
+            </div>
+            <div class="col-1">
+                <a href="/users/<int:user_id>">
+                    <button class="btn btn-secondary">Account</button>
+                </a>
+            </div>
+            <div class="col-1">
+                <form action="/logout" method="post">
+                    <button class="btn btn-secondary">Logout</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <form {% if edit == True: %} action="/recipes/edit/{{recipe.id}}" {% else %} action="/recipes/new" {% endif %} method="post">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label>Name:</label>
+                                    <input name="name" class="form-control" {% if edit == True: %} value="{{recipe.name}}" {% endif %}>
+                                    {% with messages = get_flashed_messages(category_filter=["name"]) %}
+                                        {% if messages %}
+                                            {% for message in messages %}
+                                                <div class="alert alert-dark" role="alert">
+                                                    {{message}}
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endwith %}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label>Description:</label>
+                                    <textarea name="description" class="form-control">{% if edit == True: %} {{recipe.description}} {% endif %}</textarea>
+                                        {% with messages = get_flashed_messages(category_filter=["description"]) %}
+                                            {% if messages %}
+                                                {% for message in messages %}
+                                                    <div class="alert alert-dark" role="alert">
+                                                        {{message}}
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endwith %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label>All-Grain:</label>
+                                    <textarea name="allgrain" class="form-control">{% if edit == True: %} {{recipe.allgrain}} {% endif %}</textarea>
+                                        {% with messages = get_flashed_messages(category_filter=["allgrain"]) %}
+                                            {% if messages %}
+                                                {% for message in messages %}
+                                                    <div class="alert alert-dark" role="alert">
+                                                        {{message}}
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endwith %}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label>Malt/Grain Bill:</label>
+                                    <textarea name="maltgrain" class="form-control">{% if edit == True: %} {{recipe.maltgrain}} {% endif %}</textarea>
+                                        {% with messages = get_flashed_messages(category_filter=["maltgrain"]) %}
+                                            {% if messages %}
+                                                {% for message in messages %}
+                                                    <div class="alert alert-dark" role="alert">
+                                                        {{message}}
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endwith %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label>Hops Schedule:</label>
+                                    <textarea name="hopsched" class="form-control">{% if edit == True: %} {{recipe.hopsched}} {% endif %}</textarea>
+                                        {% with messages = get_flashed_messages(category_filter=["hopsched"]) %}
+                                            {% if messages %}
+                                                {% for message in messages %}
+                                                    <div class="alert alert-dark" role="alert">
+                                                        {{message}}
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endwith %}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label>Yeast:</label>
+                                    <textarea name="yeast" class="form-control">{% if edit == True: %} {{recipe.yeast}} {% endif %}</textarea>
+                                        {% with messages = get_flashed_messages(category_filter=["yeast"]) %}
+                                            {% if messages %}
+                                                {% for message in messages %}
+                                                    <div class="alert alert-dark" role="alert">
+                                                        {{message}}
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endwith %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label>Instructions:</label>
+                                    <textarea name="instructions" class="form-control">{% if edit == True: %} {{recipe.instructions}} {% endif %}</textarea>
+                                        {% with messages = get_flashed_messages(category_filter=["instructions"]) %}
+                                            {% if messages %}
+                                                {% for message in messages %}
+                                                    <div class="alert alert-dark" role="alert">
+                                                        {{message}}
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endwith %}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label>Notes:</label>
+                                    <textarea name="notes" class="form-control">{% if edit == True: %} {{recipe.notes}} {% endif %}</textarea>
+                                        {% with messages = get_flashed_messages(category_filter=["notes"]) %}
+                                            {% if messages %}
+                                                {% for message in messages %}
+                                                    <div class="alert alert-dark" role="alert">
+                                                        {{message}}
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endwith %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>Privacy Setting:</p>
+                                <div class="form-group">
+                                    <label for="yes_privacy">Private</label>
+                                    <input type="radio" name="privacy" class="form-control" id="yes_privacy" value="True" {% if edit == True:%} {% if recipe.privacy == True: %} checked {% endif %}{% endif %}>
+                                    <label for="no_privacy">Public</label>
+                                    <input type="radio" name="privacy" class="form-control" id="no_privacy" value="False" {% if edit == True: %} {% if recipe.privacy == False: %} checked {% endif %}{% endif %}>
+                                </div>
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-secondary">
+                                    {% if edit == False: %}
+                                        Add Recipe
+                                    {% else: %}
+                                        Update
+                                    {% endif %}
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
