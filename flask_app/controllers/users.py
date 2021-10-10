@@ -49,7 +49,19 @@ def user(user_id):
         "user_id": user_id
     }
     user_recipes = Recipe.get_user_recipes(data)
-    return render_template("account.html", user=user, user_recipes=user_recipes)
+    return render_template("account.html", user = user, user_id = user_id, user_recipes = user_recipes)
+
+@app.route("/users/account", methods=["GET"])
+def session_user(user_id):
+    user_data = {
+        session["user_id"]: user_id
+    }
+    user = User.get_user(user_data)
+    data = {
+        "user_id": user_id
+    }
+    user_recipes = Recipe.get_session_recipes(data)
+    return render_template("account.html", user = user, user_id = user_id, user_recipes = user_recipes)
 
 @app.route("/logout", methods=["POST"])
 def logout():

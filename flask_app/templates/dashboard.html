@@ -18,7 +18,7 @@
                     </a>
                 </div>
                 <div class="col-1">
-                    <a href="/users/<int:user_id>">
+                    <a href="/users/account">
                         <button class="btn btn-secondary">Account</button>
                     </a>
                 </div>
@@ -39,7 +39,7 @@
                                 <tr>
                                     <td>{{recipe.name}}</td>
                                     <td>
-                                        {{recipe.user_id}}
+                                        <a href="/users/{{recipe.user_id}}">{{recipe.user_id}}</a>
                                     </td>
                                     <td>
                                         <a href="/recipes/{{recipe.id}}">View Instructions</a>

@@ -30,8 +30,17 @@ class Recipe:
         return recipes
 
     @classmethod
-    def get_all_private(cls):
-        query = "SELECT * FROM recipes WHERE user_id = %(user_id)s AND privacy = 1;"
+    def get_user_recipes(cls, data):
+        query = "SELECT * FROM recipes WHERE WHERE user_id = %(user_id)s AND privacy = 0;"
+        results = connectToMySQL("recipes").query_db(query, data)
+        recipes = []
+        for recipe in results:
+            results.append(cls(recipe))
+        return recipes
+
+    @classmethod
+    def get_session_recipes(cls, data):
+        query = "SELECT * FROM recipes WHERE user_id = %(user_id)s;"
         results = connectToMySQL("recipes").query_db(query)
         recipes = []
         for recipe in results:
@@ -94,12 +103,3 @@ class Recipe:
             valid_recipe = False
             flash("Notes must be more than 3 characters", "notes")
         return valid_recipe
-
-    @classmethod
-    def get_user_recipes(cls, data):
-        query = "SELECT * FROM recipes WHERE user_id = %(user_id)s"
-        posts = connectToMySQL("recipes").query_db(query, data)
-        results = []
-        for recipe in results:
-            results.append(cls(recipe))
-        return results
