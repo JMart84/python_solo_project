@@ -37,8 +37,8 @@ def login_user():
     else:
         return redirect("/")
 
-@app.route("/users/<int:user_id>")
-def user(user_id):
+@app.route("/users/<int:user_id>", methods=["GET"])
+def show_user(user_id):
     if "user_id" not in session:
         return redirect("/")
     user_data = {
@@ -60,8 +60,8 @@ def session_user(user_id):
     data = {
         "user_id": user_id
     }
-    user_recipes = Recipe.get_session_recipes(data)
-    return render_template("account.html", user = user, user_id = user_id, user_recipes = user_recipes)
+    recipes = Recipe.get_session_recipes(data)
+    return render_template("account.html", user = user, user_id = user_id, recipes = recipes)
 
 @app.route("/logout", methods=["POST"])
 def logout():

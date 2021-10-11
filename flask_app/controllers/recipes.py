@@ -37,7 +37,7 @@ def create_recipe():
         return "I'm sorry, that request method isn't allowed."
 
 
-@app.route("/recipes/<int:recipe_id>")
+@app.route("/recipes/<int:recipe_id>", methods=["GET", "POST"])
 def show_recipe(recipe_id):
     data = {"id": recipe_id}
     recipe = Recipe.find_by_id(data)
