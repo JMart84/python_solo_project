@@ -33,6 +33,7 @@ def login_user():
         session["user_id"] = this_user.id
         session["user_name"] = this_user.first_name
         session["logged_in"] = True
+        print(session["user_id"])
         return redirect("/dashboard")
     else:
         return redirect("/")
@@ -49,19 +50,21 @@ def show_user(user_id):
         "user_id": user_id
     }
     user_recipes = Recipe.get_user_recipes(data)
-    return render_template("account.html", user = user, user_id = user_id, user_recipes = user_recipes)
+    return render_template("user.html", user = user, user_id = user_id, user_recipes = user_recipes)
 
 @app.route("/users/account", methods=["GET"])
-def session_user(user_id):
+def session_user():
+    if "user_id" not in session:
+        return redirect("/")
     user_data = {
-        session["user_id"]: user_id
+        "id": session["user_id"]
     }
     user = User.get_user(user_data)
     data = {
-        "user_id": user_id
+        "user_id": user.id
     }
-    recipes = Recipe.get_session_recipes(data)
-    return render_template("account.html", user = user, user_id = user_id, recipes = recipes)
+    my_recipes = Recipe.get_session_recipes(data)
+    return render_template("account.html", user = user, user_id = user.id, my_recipes = my_recipes)
 
 @app.route("/logout", methods=["POST"])
 def logout():
