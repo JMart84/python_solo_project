@@ -49,6 +49,8 @@ class Recipe:
             recipes.append(cls(recipe))
         return recipes
 
+# FIX ABOVE CLASSMETHOD!!!
+
     @classmethod
     def find_by_id(cls, data):
         query = "SELECT * FROM recipes WHERE id = %(id)s;"

@@ -9,6 +9,12 @@
     flex-direction: column;
     height: 400px;
 }
+/* .container{
+    background-image: url("../images/beer.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+} */
 
 table, th, td {
     border: 1px solid black;
@@ -16,3 +22,4 @@ table, th, td {
 table {
     border-collapse: collapse;
 }
+
