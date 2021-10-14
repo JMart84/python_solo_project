@@ -38,18 +38,16 @@ class Recipe:
             recipes.append(cls(recipe))
         return recipes
 
-# NEED TO FIX THIS ONE BELOW TO RENDER ONLY SESSION["user_id"]
 
     @classmethod
     def get_session_recipes(cls, data):
-        query = "SELECT * FROM recipes WHERE user_id = 3;"
-        results = connectToMySQL("recipes").query_db(query)
+        query = "SELECT * FROM recipes WHERE user_id = %(user_id)s;"
+        results = connectToMySQL("recipes").query_db(query, data)
         recipes = []
         for recipe in results:
             recipes.append(cls(recipe))
         return recipes
 
-# FIX ABOVE CLASSMETHOD!!!
 
     @classmethod
     def find_by_id(cls, data):

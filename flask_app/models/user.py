@@ -60,6 +60,7 @@ class User:
         else:
             return False
 
+
     @staticmethod
     def validate_registration(user):
         valid_user = True

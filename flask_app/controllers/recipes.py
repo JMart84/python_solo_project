@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, session, flash, request
 from flask_app import app
 from flask_app.models.recipe import Recipe
+from flask_app.models.user import User
 
 @app.route("/dashboard")
 def dashboard():
